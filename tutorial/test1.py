@@ -33,9 +33,11 @@ class CityName(str, Enum):
 @app01.get("/enum/{city}")
 async def latest(city: CityName):
     if city == CityName.BeiJing:
-        return {"cityName": city, "count": 1111, "death": 10}
+        return {"cityName": city, "confirmed": 1492, "death": 7}
     elif city == CityName.ShangHai:
-        return {"cityName": city, "count": 2222, "death": 22}
+        return {"cityName": city, "confirmed": 971, "death": 9}
+    else:
+        return {"cityName": city, "latest": "UnKnown"}
 
 
 # 通过path path 传递路径  :path  代表 这个是个路径传值
@@ -45,7 +47,7 @@ async def file_path(file_path: str):
 
 
 # 验证参数
-@app01.get("path_/{num}")
+@app01.get("path_/{num}") # Path校验路径参数 所使用的库
 def path_params_verify(num: int = Path(..., title="Your number", description="不可描述", ge=1, le=10)):
     return num
 
